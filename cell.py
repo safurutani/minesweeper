@@ -9,4 +9,8 @@ class Cell:
             location,
             text='Text'
         )
+        btn.bind('<Button-1>', self.lmb_actions)
         self.cell_btn_object = btn
+    def lmb_actions(self, event):
+        print(event)
+        print("I got left clicked!")
