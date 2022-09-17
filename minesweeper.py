@@ -1,5 +1,6 @@
 from tkinter import *
 import settings
+import utils
 
 #creates the window
 root = Tk()
@@ -14,7 +15,7 @@ top_frame = Frame(
     root, 
     bg="#777AAA",
     width=800,
-    height=120
+    height=utils.height_percent(20)
 )
 top_frame.place(x=0, y=0)
 
