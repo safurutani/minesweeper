@@ -31,11 +31,12 @@ center_frame.place(x=utils.width_percent(5), y=utils.height_percent(20))
 #dynamically add all the cells as buttons into the frame
 for x in range(settings.GRID_SIZE):
     for y in range(settings.GRID_SIZE):
-        c = Cell()
+        c = Cell(x,y)
         c.create_btn_object(center_frame)
         c.cell_btn_object.grid(
             column=x, row=y
             )
+Cell.randomize_mines()
 
 #keeps window open until closed out with the X
 root.mainloop()
