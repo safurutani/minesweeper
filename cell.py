@@ -17,19 +17,46 @@ class Cell:
             location,
             width=12,
             height=4,
-            text=f''
+            text=f'{self.x}, {self.y}'
         )
         btn.bind('<Button-1>', self.lmb_actions)
         btn.bind('<Button-3>', self.rmb_actions)
         self.cell_btn_object = btn
+    
     def lmb_actions(self, event):
         if self.is_mine:
             self.show_mine()
-    #ends game - player loses
+        else:self.show_cell()
+    def rmb_actions(self, event):
+        print("rmb")
+   
+    #should end game - shows red temporarily
     def show_mine(self):
         self.cell_btn_object.configure(bg="red")
-    def rmb_actions(self, event):
-        print("rmb")    
+
+    #return a cell obj based on val of x,y
+    def get_cell_by_axis(self,x,y):
+        for cell in Cell.all:
+            if cell.x == x and cell.y == y:
+                return cell
+
+    #needs to utilize algorithm to determine # of adjacent mines
+    #looks at the 8 adjacent cells
+    def show_cell(self):
+        adjacent_cells = [
+            self.get_cell_by_axis(self.x - 1, self.y - 1),
+            self.get_cell_by_axis(self.x - 1, self.y),
+            self.get_cell_by_axis(self.x - 1, self.y + 1),
+            self.get_cell_by_axis(self.x,     self.y - 1),
+            self.get_cell_by_axis(self.x + 1, self.y - 1),
+            self.get_cell_by_axis(self.x + 1, self.y),
+            self.get_cell_by_axis(self.x + 1, self.y + 1),
+            self.get_cell_by_axis(self.x,     self.y + 1),
+        ]
+        #eliminate none values in the list
+        adjacent_cells = [cell for cell in adjacent_cells if cell is not None]
+        print(adjacent_cells)
+        
 
     @staticmethod
     def randomize_mines(): 
