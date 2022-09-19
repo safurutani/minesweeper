@@ -9,6 +9,7 @@ class Cell:
     def __init__(self,x, y, is_mine=False):
         self.is_mine = is_mine
         self.is_open = False
+        self.is_flagged = False
         self.cell_btn_object = None
         self.x = x
         self.y = y
@@ -48,8 +49,12 @@ class Cell:
                     cell_obj.show_cell()
             self.show_cell()
     def rmb_actions(self, event):
-        print("rmb")
-   
+        if not self.is_flagged:
+            self.cell_btn_object.configure(bg="#3C5468")
+            self.is_flagged = True
+        else:
+            self.cell_btn_object.configure(bg="SystemButtonFace")
+            self.is_flagged = False
     #should end game - shows red temporarily
     def show_mine(self):
         self.cell_btn_object.configure(bg="red")
