@@ -65,9 +65,11 @@ class Cell:
         if not self.is_flagged:
             self.cell_btn_object.configure(bg="#3C5468")
             self.is_flagged = True
+            self.cell_btn_object.unbind('<Button-1>')
         else:
             self.cell_btn_object.configure(bg="SystemButtonFace")
             self.is_flagged = False
+            self.cell_btn_object.bind('<Button-1>', self.lmb_actions)
     #should end game - shows red temporarily
     def show_mine(self):
         self.cell_btn_object.configure(bg="red")
