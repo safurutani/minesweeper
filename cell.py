@@ -116,6 +116,5 @@ class Cell:
         mines = random.sample(Cell.all, settings.NUM_MINES)
         for picked_cell in mines:
             picked_cell.is_mine = True
-        print(mines)
     def __repr__(self):
         return f"Cell ({self.x}, {self.y})"
