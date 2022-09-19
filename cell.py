@@ -1,4 +1,5 @@
 from tkinter import Button,Label
+from tkinter import font
 import random
 import settings
 import ctypes
@@ -37,7 +38,7 @@ class Cell:
             text=f"Cells Left: {Cell.cell_count}",
             width=12,
             height=3,
-            font=("", 16)
+            font=("Britannic Bold", 16)
         )
         Cell.cell_count_label_object = lbl
 

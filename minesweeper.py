@@ -24,7 +24,7 @@ game_title = Label(
     top_frame,
     bg="#777AAA",
     text=("Minesweeper"),
-    font=('', 30)
+    font=('Britannic Bold', 30)
 )
 game_title.place(x=utils.width_percent(6), y=utils.height_percent(5))
 center_frame = Frame(
@@ -33,7 +33,7 @@ center_frame = Frame(
     width=utils.width_percent(90),
     height=utils.height_percent(75)
 )
-center_frame.place(x=utils.width_percent(4.5), y=utils.height_percent(20))
+center_frame.place(x=utils.width_percent(4.5), y=utils.height_percent(22))
 
 #dynamically add all the cells as buttons into the frame
 for x in range(settings.GRID_SIZE):
