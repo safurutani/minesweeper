@@ -48,14 +48,18 @@ class Cell:
             #clears all surrounding cells when no mines are near
             if self.nearby_mines == 0:
                 for cell_obj in self.adjacent_cells:
-                    cell_obj.show_cell()
-            self.show_cell()
-            
+                    if not self.is_flagged:
+                        cell_obj.show_cell()
+                    self.cell_btn_object.unbind('<Button-1>')
+                    self.cell_btn_object.unbind('<Button-3>')
+            if not self.is_flagged:
+                self.show_cell()
+                #cancel lmb and rmb events when cell is opened
+                self.cell_btn_object.unbind('<Button-1>')
+                self.cell_btn_object.unbind('<Button-3>')
             if Cell.cell_count == settings.NUM_MINES:
-                ctypes.windll.user32.MessageBoxW(0, "Congratulations! You Won!", "Game Over,", 0)
-        #cancel lmb and rmb events when cell is opened
-        self.cell_btn_object.unbind('<Button-1>')
-        self.cell_btn_object.unbind('<Button-3>')
+                ctypes.windll.user32.MessageBoxW(0, "Congratulations! You avoided all the mines!", "You Won!,", 0)
+        
     def rmb_actions(self, event):
         if not self.is_flagged:
             self.cell_btn_object.configure(bg="#3C5468")
@@ -66,7 +70,7 @@ class Cell:
     #should end game - shows red temporarily
     def show_mine(self):
         self.cell_btn_object.configure(bg="red")
-        ctypes.windll.user32.MessageBoxW(0, "You clicked on a mine \n:(", "Game Over,", 0)
+        ctypes.windll.user32.MessageBoxW(0, "You clicked on a mine :(", "Game Over", 0)
         sys.exit()    
     #return a cell obj based on val of x,y
     def get_cell_by_axis(self,x,y):
