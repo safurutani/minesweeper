@@ -20,6 +20,13 @@ top_frame = Frame(
 )
 top_frame.place(x=0, y=0)
 
+game_title = Label(
+    top_frame,
+    bg="#777AAA",
+    text=("Minesweeper"),
+    font=('', 30)
+)
+game_title.place(x=utils.width_percent(6), y=utils.height_percent(5))
 center_frame = Frame(
     root,
     bg="#C2EAFC",
@@ -38,7 +45,7 @@ for x in range(settings.GRID_SIZE):
             )
 #calling the label from Cell class
 Cell.create_cell_count_label(top_frame)
-Cell.cell_count_label_object.place(x=600, y=15)
+Cell.cell_count_label_object.place(x=600, y=30)
 Cell.randomize_mines()
 
 #keeps window open until closed out with the X

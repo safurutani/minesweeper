@@ -1,6 +1,8 @@
 from tkinter import Button,Label
 import random
 import settings
+import ctypes
+import sys
 
 class Cell:
     all=[]
@@ -48,6 +50,12 @@ class Cell:
                 for cell_obj in self.adjacent_cells:
                     cell_obj.show_cell()
             self.show_cell()
+            
+            if Cell.cell_count == settings.NUM_MINES:
+                ctypes.windll.user32.MessageBoxW(0, "Congratulations! You Won!", "Game Over,", 0)
+        #cancel lmb and rmb events when cell is opened
+        self.cell_btn_object.unbind('<Button-1>')
+        self.cell_btn_object.unbind('<Button-3>')
     def rmb_actions(self, event):
         if not self.is_flagged:
             self.cell_btn_object.configure(bg="#3C5468")
@@ -58,7 +66,8 @@ class Cell:
     #should end game - shows red temporarily
     def show_mine(self):
         self.cell_btn_object.configure(bg="red")
-
+        ctypes.windll.user32.MessageBoxW(0, "You clicked on a mine \n:(", "Game Over,", 0)
+        sys.exit()    
     #return a cell obj based on val of x,y
     def get_cell_by_axis(self,x,y):
         for cell in Cell.all:
@@ -89,6 +98,7 @@ class Cell:
             if cell.is_mine:
                 counter += 1
         return counter
+    
     #looks at the 8 adjacent cells
     def show_cell(self): 
         if not self.is_open:
@@ -100,6 +110,7 @@ class Cell:
                 Cell.cell_count_label_object.configure(text=f"Cells Left: {Cell.cell_count}")
         #lets game know that the cell has been revealed to user
         self.is_open = True
+    
     @staticmethod
     def randomize_mines(): 
         mines = random.sample(Cell.all, settings.NUM_MINES)
