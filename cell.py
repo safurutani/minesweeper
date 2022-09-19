@@ -26,7 +26,12 @@ class Cell:
     def lmb_actions(self, event):
         if self.is_mine:
             self.show_mine()
-        else:self.show_cell()
+        else:
+            #clears all surrounding cells when no mines are near
+            if self.nearby_mines == 0:
+                for cell_obj in self.adjacent_cells:
+                    cell_obj.show_cell()
+            self.show_cell()
     def rmb_actions(self, event):
         print("rmb")
    
