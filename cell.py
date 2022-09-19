@@ -40,10 +40,9 @@ class Cell:
             if cell.x == x and cell.y == y:
                 return cell
 
-    #needs to utilize algorithm to determine # of adjacent mines
-    #looks at the 8 adjacent cells
-    def show_cell(self):
-        adjacent_cells = [
+    @property
+    def adjacent_cells(self):
+        cells = [
             self.get_cell_by_axis(self.x - 1, self.y - 1),
             self.get_cell_by_axis(self.x - 1, self.y),
             self.get_cell_by_axis(self.x - 1, self.y + 1),
@@ -54,8 +53,21 @@ class Cell:
             self.get_cell_by_axis(self.x,     self.y + 1),
         ]
         #eliminate none values in the list
-        adjacent_cells = [cell for cell in adjacent_cells if cell is not None]
-        print(adjacent_cells)
+        cells = [cell for cell in cells if cell is not None]
+        return cells
+
+    #needs to utilize algorithm to determine # of adjacent mines
+    @property
+    def nearby_mines(self):
+        counter = 0
+        for cell in self.adjacent_cells:
+            if cell.is_mine:
+                counter += 1
+        return counter
+    #looks at the 8 adjacent cells
+    def show_cell(self):
+        
+        print(self.nearby_mines)
         
 
     @staticmethod
