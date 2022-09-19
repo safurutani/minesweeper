@@ -24,7 +24,7 @@ game_title = Label(
     top_frame,
     bg="#777AAA",
     text=("Minesweeper"),
-    font=('Britannic Bold', 30)
+    font=('Berlin Sans FB', 30)
 )
 game_title.place(x=utils.width_percent(6), y=utils.height_percent(5))
 center_frame = Frame(

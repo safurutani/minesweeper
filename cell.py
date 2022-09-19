@@ -38,7 +38,7 @@ class Cell:
             text=f"Cells Left: {Cell.cell_count}",
             width=12,
             height=3,
-            font=("Britannic Bold", 16)
+            font=('Berlin Sans FB', 16)
         )
         Cell.cell_count_label_object = lbl
 
