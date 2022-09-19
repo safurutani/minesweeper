@@ -5,6 +5,7 @@ import settings
 class Cell:
     all=[]
     cell_count_label_object = None
+    cell_count = settings.CELL_COUNT
     def __init__(self,x, y, is_mine=False):
         self.is_mine = is_mine
         self.cell_btn_object = None
@@ -29,7 +30,7 @@ class Cell:
         lbl = Label(
             location,
             bg="#777AAA",
-            text=f"Cells Left: {settings.CELL_COUNT}",
+            text=f"Cells Left: {Cell.cell_count}",
             width=12,
             height=3,
             font=("", 16)
@@ -83,8 +84,13 @@ class Cell:
                 counter += 1
         return counter
     #looks at the 8 adjacent cells
-    def show_cell(self):    
-        self.cell_btn_object.configure(text=self.nearby_mines)        
+    def show_cell(self): 
+        #decrease cell count by one each time one is clicked  
+        Cell.cell_count -= 1
+        self.cell_btn_object.configure(text=self.nearby_mines)
+        #Update the cell count when cells are clicked
+        if Cell.cell_count_label_object:
+            Cell.cell_count_label_object.configure(text=f"Cells Left: {Cell.cell_count}")
 
     @staticmethod
     def randomize_mines(): 
