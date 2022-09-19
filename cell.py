@@ -15,9 +15,9 @@ class Cell:
     def create_btn_object(self, location):
         btn = Button(
             location,
-            width=12,
-            height=4,
-            text=f'{self.x}, {self.y}'
+            width=6,
+            height=2,
+            text=f''
         )
         btn.bind('<Button-1>', self.lmb_actions)
         btn.bind('<Button-3>', self.rmb_actions)
@@ -65,10 +65,8 @@ class Cell:
                 counter += 1
         return counter
     #looks at the 8 adjacent cells
-    def show_cell(self):
-        
-        print(self.nearby_mines)
-        
+    def show_cell(self):    
+        self.cell_btn_object.configure(text=self.nearby_mines)        
 
     @staticmethod
     def randomize_mines(): 

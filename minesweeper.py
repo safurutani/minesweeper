@@ -26,7 +26,7 @@ center_frame = Frame(
     width=utils.width_percent(90),
     height=utils.height_percent(75)
 )
-center_frame.place(x=utils.width_percent(5), y=utils.height_percent(20))
+center_frame.place(x=utils.width_percent(4.5), y=utils.height_percent(20))
 
 #dynamically add all the cells as buttons into the frame
 for x in range(settings.GRID_SIZE):
