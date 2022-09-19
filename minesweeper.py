@@ -45,7 +45,7 @@ for x in range(settings.GRID_SIZE):
             )
 #calling the label from Cell class
 Cell.create_cell_count_label(top_frame)
-Cell.cell_count_label_object.place(x=600, y=30)
+Cell.cell_count_label_object.place(x=590, y=20)
 Cell.randomize_mines()
 
 #keeps window open until closed out with the X

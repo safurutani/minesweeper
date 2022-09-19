@@ -38,7 +38,7 @@ class Cell:
             text=f"Cells Left: {Cell.cell_count}",
             width=12,
             height=3,
-            font=('Berlin Sans FB', 16)
+            font=('Berlin Sans FB', 20)
         )
         Cell.cell_count_label_object = lbl
 
@@ -109,7 +109,7 @@ class Cell:
         if not self.is_open:
             #decrease cell count by one each time one is clicked  
             Cell.cell_count -= 1
-            self.cell_btn_object.configure(text=self.nearby_mines)
+            self.cell_btn_object.configure(text=self.nearby_mines,font=('Berlin Sans FB', 10))
             #Update the cell count when cells are clicked
             if Cell.cell_count_label_object:
                 Cell.cell_count_label_object.configure(text=f"Cells Left: {Cell.cell_count}")
