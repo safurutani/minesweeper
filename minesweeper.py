@@ -36,6 +36,9 @@ for x in range(settings.GRID_SIZE):
         c.cell_btn_object.grid(
             column=x, row=y
             )
+#calling the label from Cell class
+Cell.create_cell_count_label(top_frame)
+Cell.cell_count_label_object.place(x=600, y=15)
 Cell.randomize_mines()
 
 #keeps window open until closed out with the X
