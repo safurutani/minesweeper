@@ -51,15 +51,17 @@ class Cell:
                 for cell_obj in self.adjacent_cells:
                     if not self.is_flagged:
                         cell_obj.show_cell()
+                        cell_obj.cell_btn_object.configure(bg="#C2EAFC")
                     self.cell_btn_object.unbind('<Button-1>')
                     self.cell_btn_object.unbind('<Button-3>')
             if not self.is_flagged:
                 self.show_cell()
+                self.cell_btn_object.configure(bg="#C2EAFC")
                 #cancel lmb and rmb events when cell is opened
                 self.cell_btn_object.unbind('<Button-1>')
                 self.cell_btn_object.unbind('<Button-3>')
             if Cell.cell_count == settings.NUM_MINES:
-                ctypes.windll.user32.MessageBoxW(0, "Congratulations! You avoided all the mines!", "You Won!,", 0)
+                result = ctypes.windll.user32.MessageBoxW(0, "Congratulations! You avoided all the mines!\n\nPlay again?", "You Won!", 0)
         
     def rmb_actions(self, event):
         if not self.is_flagged:
@@ -70,11 +72,14 @@ class Cell:
             self.cell_btn_object.configure(bg="SystemButtonFace")
             self.is_flagged = False
             self.cell_btn_object.bind('<Button-1>', self.lmb_actions)
+
     #should end game - shows red temporarily
     def show_mine(self):
         self.cell_btn_object.configure(bg="red")
-        ctypes.windll.user32.MessageBoxW(0, "You clicked on a mine :(", "Game Over", 0)
-        sys.exit()    
+        result = ctypes.windll.user32.MessageBoxW(0, "You clicked on a mine :(\n\nKeep playing this game?", "You lost", 4)
+        if result == 7:
+            sys.exit()   
+
     #return a cell obj based on val of x,y
     def get_cell_by_axis(self,x,y):
         for cell in Cell.all:
